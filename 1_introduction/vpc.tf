@@ -1,11 +1,20 @@
 
+# 1_introduction
+
+//This demo was created while following the **Lauro Ifalho Muller** Terraform course. It covers a basic VPC setup (IaC fundamentals).
+
+
+
 terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~ 5.0"
+      version = "~>5.0"
     }
   }
+}
+provider "aws" {
+  region = "ap-south-1"
 }
 
 resource "aws_vpc" "demo_vpc" {
@@ -23,11 +32,11 @@ resource "aws_subnet" "private_subnet" {
 }
 
 resource "aws_internet_gateway" "igw" {
-  vpc_id = aws.vpc.demo_vpc.id
+  vpc_id = aws_vpc.demo_vpc.id
 }
 
 resource "aws_route_table" "public_rtb" {
-  vpc_id = aws.vpc.demo_vpc.id
+  vpc_id = aws_vpc.demo_vpc.id
 
   route {
     cidr_block = "0.0.0.0/0"
