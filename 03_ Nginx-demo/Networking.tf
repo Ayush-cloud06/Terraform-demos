@@ -1,23 +1,42 @@
 
-resource "aws_vpc" "main" {
-  cidr_block = "10.0.0.0/16"
 
-  tags = {
+locals {
+  common_tags = {
+
     ManagedBy = "Terraform"
+    Project   = "03_Nginx_demo"
+
   }
 }
 
+
+resource "aws_vpc" "main" {
+  cidr_block = "10.0.0.0/16"
+
+  tags = merge(local.common_tags, {
+    Name = "Main Vpc"
+  })
+}
+
 resource "aws_subnet" "public" {
-  vpc_id     = aws_vpc.main.id
-  cidr_block = "10.0.0.0/24"
+  vpc_id                  = aws_vpc.main.id
+  cidr_block              = "10.0.0.0/24"
+  availability_zone       = "ap-south-1a"
+  map_public_ip_on_launch = true
+
+  tags = merge(local.common_tags, {
+    Name = "Main Subnet"
+  })
+
 }
 
 resource "aws_internet_gateway" "main" {
   vpc_id = aws_vpc.main.id
 
-  tags = {
-    Name = "Nginx_igw"
-  }
+  tags = merge(local.common_tags, {
+    Name = "Main IGW"
+  })
+
 }
 
 resource "aws_route_table" "public" {
@@ -27,6 +46,10 @@ resource "aws_route_table" "public" {
     cidr_block = "0.0.0.0/0"
     gateway_id = aws_internet_gateway.main.id
   }
+
+  tags = merge(local.common_tags, {
+    Name = "main route table"
+  })
 }
 
 
