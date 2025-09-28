@@ -1,3 +1,4 @@
+
 data "aws_ami" "ubuntu" {
   most_recent = true
   owners      = ["099720109477"]
@@ -21,7 +22,15 @@ data "aws_caller_identity" "current" {
 data "aws_region" "current" {
 }
 
+data "aws_vpc" "Prod_vpc" {
+  tags = {
+    Env = "Prod"
+  }
+}
 
+output "prod_vpc_id" {
+  value = data.aws_vpc.Prod_vpc.id
+}
 
 output "aws_caller_identity" {
   value = data.aws_caller_identity.current
@@ -30,9 +39,6 @@ output "aws_caller_identity" {
 output "aws_region" {
   value = data.aws_region.current
 }
-
-
-
 
 resource "aws_instance" "web" {
   ami                         = data.aws_ami.ubuntu.id
@@ -47,3 +53,4 @@ resource "aws_instance" "web" {
   }
 
 }
+
