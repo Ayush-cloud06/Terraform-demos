@@ -1,7 +1,7 @@
 
 
 resource "aws_instance" "web" {
-  ami                         = "ami-09a08d6a06d9eaaee"
+  ami                         = "ami-0191ea01412efdb18" //bitnami-nginx-ami
   associate_public_ip_address = true
   instance_type               = "t2.micro"
   availability_zone           = "ap-south-1a"
@@ -15,7 +15,9 @@ resource "aws_instance" "web" {
   tags = merge(local.common_tags, {
     Name = "Ec2"
   })
-
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 resource "aws_security_group" "public_http_traffic" {
