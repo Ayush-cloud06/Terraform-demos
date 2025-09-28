@@ -1,8 +1,3 @@
-
-
-
-
-
 data "aws_ami" "ubuntu" {
   most_recent = true
   owners      = ["099720109477"]
@@ -19,8 +14,21 @@ data "aws_ami" "ubuntu" {
 
 }
 
-output "west" {
-  value = data.aws_ami.ubuntu.id
+//Acc & region info
+data "aws_caller_identity" "current" {
+}
+
+data "aws_region" "current" {
+}
+
+
+
+output "aws_caller_identity" {
+  value = data.aws_caller_identity.current
+}
+
+output "aws_region" {
+  value = data.aws_region.current
 }
 
 
@@ -39,4 +47,3 @@ resource "aws_instance" "web" {
   }
 
 }
-
