@@ -11,14 +11,25 @@ variable "ec2_instance_size" {
   }
 }
 
-variable "ec2_volume_size" {
-  type        = number
+variable "ec2_volume_config" {
+  type = object({ //can use map instead of "object" but then key will need to be accurately defined
+    size = number
+    type = string
+  })
+
+  description = "The size and type of root volume attached to Ec2"
+
+  default = {
+    size = 10
+    type = "gp2"
+  }
+  /*type        = number
   default     = 10
-  description = "The size in GB to root volume attached to Ec2"
+  */
 }
 
-variable "ec2_volume_type" {
+/*variable "ec2_volume_type" {
   type        = string
   default     = "gp2"
   description = "The volume type of root volume"
-}
+}*/
