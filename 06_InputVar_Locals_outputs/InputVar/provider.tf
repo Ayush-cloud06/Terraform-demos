@@ -1,5 +1,6 @@
 
 
+
 terraform {
   required_version = "~> 1.13.0"
   required_providers {
@@ -11,5 +12,5 @@ terraform {
 }
 
 provider "aws" {
-  region = var.aws_region
+  region = "ap-south-1"
 }
