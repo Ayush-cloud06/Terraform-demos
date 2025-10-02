@@ -1,12 +1,13 @@
 
-variable "ec2_instance_size" {
+variable "ec2_instance_type" {
   type        = string
   description = "Default size of newly created Ec2 instance"
 
   validation {
-    condition = contains(["t2.micro", "t3.micro"], var.ec2_instance_size)
-    //Alternative : var.ec2_instance_type == "t2.micro" || var.ec2_instance_type == "t3.micro"
-    error_message = "Only supports t2.micro and t3.micro"
+    condition = startswith(var.ec2_instance_type, "t3")
+    //(prev)Alternative : var.ec2_instance_type == "t2.micro" || var.ec2_instance_type == "t3.micro"
+    error_message = "Only supports t3 family"
+    //(prev) error_message = "Only supports t2.micro and t3.micro"
   }
 }
 
