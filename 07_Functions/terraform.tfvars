@@ -37,5 +37,8 @@ users = [
   },
   { role     = "Sre"
     username = "peter-parker"
+    }, {
+    role     = "pentester"
+    username = "mary-jane"
   }
 ]
