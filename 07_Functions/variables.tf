@@ -19,3 +19,11 @@ variable "map_instance" {
     instance_provider = string
   }))
 }
+
+
+variable "users" {
+  type = list(object({
+    username = string
+    role     = string
+  }))
+}

@@ -24,3 +24,18 @@ map_instance = [
     instance_provider = "AZURE"
   }
 ]
+
+
+users = [
+  {
+    role     = "admin"
+    username = "luke-walker"
+  },
+  {
+    role     = "Auditor"
+    username = "mary-jane"
+  },
+  { role     = "Sre"
+    username = "peter-parker"
+  }
+]
