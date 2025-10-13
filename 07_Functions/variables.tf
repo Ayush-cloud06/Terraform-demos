@@ -9,6 +9,9 @@ variable "Number_of_instances" {
   type = list(number)
 }
 
+variable "numbers_map" {
+  type = map(number)
+}
 
 variable "map_instance" {
   type = list(object({
