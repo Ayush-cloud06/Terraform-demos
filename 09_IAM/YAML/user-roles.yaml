@@ -1,0 +1,7 @@
+users:
+- username: AyushX
+  roles: [readonly, developer]
+- username: AyushY
+  roles: [admin, grclead]
+- username: AyushZ
+  roles: [sysadmin, prod]
