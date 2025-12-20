@@ -45,3 +45,10 @@ resource "aws_instance" "this" {
   }
 
 }
+
+check "cost_center_tag" {
+  assert {
+    condition     = can(aws_instance_this.tags.CostCenter != "")
+    error_message = "The cost_center tag is recommended"
+  }
+}
