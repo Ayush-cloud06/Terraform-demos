@@ -14,15 +14,7 @@ module "networking" {
       public     = true
       az         = "ap-south-1b"
     }
-    subnet_3 = {
-      cidr_block = "0.0.2.0/24"
-      public     = true
-      az         = "ap-south-1c"
-    }
-    subnet_4 = {
-      cidr_block = "0.0.3.0/24"
-      public     = true
-      az         = "ap-south-1a"
-    }
+
+
   }
 }

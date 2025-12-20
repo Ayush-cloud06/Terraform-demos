@@ -1,0 +1,2 @@
+This module creates a configurable AWS VPC with public and private subnets, designed for scalability and reuse across environments.
+The module intentionally avoids NAT Gateways to reduce cost and focuses on foundational networking primitives.
