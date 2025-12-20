@@ -19,7 +19,8 @@ data "aws_ami" "ubuntu" {
 }
 
 resource "aws_instance" "this" {
-  ami                         = data.aws_ami.ubuntu.id
+  ami = data.aws_ami.ubuntu.id
+  //subnet_id                   = aws_subnet.this.id
   associate_public_ip_address = true
   instance_type               = var.instance_type
 
@@ -31,9 +32,15 @@ resource "aws_instance" "this" {
   }
 
   lifecycle {
+    create_before_destroy = true
     precondition {
       condition     = contains(local.allowed_instance_types, var.instance_type)
       error_message = "The instance type"
+    }
+
+    postcondition {
+      condition     = contains(local.allowed_instance_types, self.instance_type)
+      error_message = "The instance type ${self.instance_type} is not allowed."
     }
   }
 
