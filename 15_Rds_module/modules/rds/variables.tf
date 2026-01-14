@@ -3,16 +3,18 @@ variable "project_name" {
 }
 
 variable "instance_class" {
-  type = string
+  type    = string
+  default = "db.t3.micro"
 
   validation {
-    condition     = contains(["db.t3.micro", var.instance_Class])
+    condition     = contains(["db.t3.micro"], var.instance_class)
     error_message = "only db.t4.micro is allowed"
   }
 }
 
 variable "storage_size" {
-  type = number
+  type    = number
+  default = 10
 
   validation {
     condition     = var.storage_size > 5 && var.storage_size <= 10
@@ -21,7 +23,8 @@ variable "storage_size" {
 }
 
 variable "engine" {
-  type = string
+  type    = string
+  default = "postres-latest"
 
   validation {
     condition     = contains(["postres-latest", "postgres-14"], var.engine)
@@ -39,9 +42,9 @@ variable "credentials" {
 
   validation {
     condition = (
-      length(regexall("[a-zA-Z]+", var.credentaials.password)) > 0
-      && length(regexall("[0-9]+", var.credentaials.password)) > 0
-      && length(regexall("[a-zA-Z0-9]{6,}+", var.credentaials.password)) > 0
+      length(regexall("[a-zA-Z]+", var.credentials.password)) > 0
+      && length(regexall("[0-9]+", var.credentials.password)) > 0
+      && length(regexall("[a-zA-Z0-9]{6,}", var.credentials.password)) > 0
 
     )
     error_message = "Must contain 6 character, with 1 digit and 1 special character"
